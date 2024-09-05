@@ -14,6 +14,13 @@ describe('CEntral de atendimento CAC-TAT', function(){
     it('Teste numero 03 - Verificar se o elemento está visivel', function(){
         cy.get('#firstName').should('be.visible')
     })
+    it('Teste numero 04 - Complete os dados necessários e envie o formulário', function(){
+        cy.get('#firstName').type('Leon')
+        cy.get('#lastName').type('Recco')
+        cy.get('#email').type('pereleorec@gmail.com')
+        cy.get('#open-text-area').type('Eu ganhei mais de 1 milhão na megasena')
+        cy.get('.button').click()
+    })
 
 })
 
