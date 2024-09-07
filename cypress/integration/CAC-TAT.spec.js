@@ -34,7 +34,7 @@ describe('CEntral de atendimento CAC-TAT', function(){
         cy.get('#firstName').type(texto_longo, { delay: 0 })
         cy.get('#lastName').type(texto_longo)
     })
-    it.only('Teste numero 07 - Validar mensagem de erro ao colocar email inválido', function(){
+    it('Teste numero 07 - Validar mensagem de erro ao colocar email inválido', function(){
         cy.get('#firstName').type('Leon')
         cy.get('#lastName').type('Recco')
         cy.get('#email').type('pereleorecgmail.com')
@@ -42,9 +42,33 @@ describe('CEntral de atendimento CAC-TAT', function(){
         cy.get('.button').click()
         cy.get('.error').should('be.visible')
     })
-
-    
-
+    it('Teste numero 08 - Inserir e validar dados de texto no campo de telefone', function(){
+        cy.get('#firstName').type('Leon')
+        cy.get('#lastName').type('Recco')
+        cy.get('#phone').type('pereleorecgmail.com').should('have.value', '')
+    })
+    it('Teste numero 09 - Validar mensagem de erro no telefone', function(){
+        cy.get('#firstName').type('Leon')
+        cy.get('#lastName').type('Recco')
+        cy.get('#email').type('pereleorecgmail.com')
+        cy.get('#phone-checkbox').check()
+        cy.get('#open-text-area').type('Eu ganhei mais de 1 milhão na megasena')
+        cy.get('.button').click()
+        cy.get('.error').should('be.visible')
+    })
+    it('Teste numero 10 - Validar mensagem de erro no telefone', function(){
+        cy.get('#firstName').type('Leon').clear().should('have.value','')
+        cy.get('#lastName').type('Recco').clear().should('have.value','')
+        cy.get('#email').type('pereleorecgmail.com').clear().should('have.value','')
+    })
+    it('Teste numero 11 - Enviar formulário usando comando customizado', function(){
+        cy.preenchaCamposObrigatorios()
+        cy.get('button[type="Submit"]').click()
+    })
+    it.only('Teste numero 12 - Enviar formulário usando comando customizado e contains', function(){
+        cy.preenchaCamposObrigatorios()
+        cy.contains('button', 'Enviar').click()
+    })
 
 
 })
