@@ -143,7 +143,7 @@ describe('CEntral de atendimento CAC-TAT', function(){
         cy.get('#privacy a').should('have.attr','target','_blank')
         cy.get('#privacy a').invoke('removeAttr','target','_blank').click()         
     })
-    it.only('Teste numero 25 - Simular resolução mobile.', function(){
+    it('Teste numero 25 - Simular resolução mobile.', function(){
         cy.preenchaCamposObrigatorios()
         cy.get(".button").click() 
                

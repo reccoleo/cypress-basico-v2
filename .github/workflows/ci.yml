@@ -1,6 +1,6 @@
-name: End-to-end Tests
-on: [push]
-jobs: 
+name: End-to-end Tests   #nome do nosso pipeline
+on: [push]               #Vai ser disparado sempre que ouver push para o repositório no github
+jobs:                    #vai executar o cypress que é o modo headless
   cypress-run:
     runs-on: ubuntu-20.04
     steps:
