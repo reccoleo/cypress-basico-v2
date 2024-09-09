@@ -139,9 +139,14 @@ describe('CEntral de atendimento CAC-TAT', function(){
     it('Teste numero 23 - Verifica se opção que abre link que abre em nova aba.', function(){
         cy.get('#privacy a').should('have.attr','target','_blank')       
     })
-    it.only('Teste numero 24 - Remover opção que abre link que abre em nova aba.', function(){
+    it('Teste numero 24 - Remover opção que abre link que abre em nova aba.', function(){
         cy.get('#privacy a').should('have.attr','target','_blank')
         cy.get('#privacy a').invoke('removeAttr','target','_blank').click()         
+    })
+    it.only('Teste numero 25 - Simular resolução mobile.', function(){
+        cy.preenchaCamposObrigatorios()
+        cy.get(".button").click() 
+               
     })
 
 })
