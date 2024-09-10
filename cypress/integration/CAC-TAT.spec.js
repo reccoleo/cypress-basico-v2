@@ -155,7 +155,7 @@ describe('CEntral de atendimento CAC-TAT', function(){
         cy.get('.success').should('not.be.visible')
     })
 
-    it.only('Teste numero 27 - Usar a função cy.tick() para avançar no tempo ao mostrar feedback.', function(){
+    it('Teste numero 27 - Usar a função cy.tick() para avançar no tempo ao mostrar feedback.', function(){
         cy.preenchaCamposObrigatorios()
         cy.get(".button").click() 
         cy.clock()
@@ -163,7 +163,48 @@ describe('CEntral de atendimento CAC-TAT', function(){
         cy.tick(3000)
         cy.get('.success').should('not.be.visible')
     })
-    
+
+    Cypress._.times(3, function(){
+        it('Teste numero 28 - Execute o teste 3 vezes com lodash.', function(){
+            cy.preenchaCamposObrigatorios()
+            cy.get(".button").click() 
+        })
+    })
+
+    it('Teste numero 29 - Exibir e esconder feedback de sucesso e erro usando o invoke.', function(){
+        cy.get('.success').should('not.be.visible').invoke('show').should('be.visible') 
+        cy.get('.error').should('not.be.visible').invoke('show').should('be.visible')
+        //Nos dois códigos acima mostramos e validamos as mensagens de erro, agora vamos esconder.
+        cy.get('.success').should('be.visible').invoke('hide').should('not.be.visible') 
+        cy.get('.error').should('be.visible').invoke('hide').should('not.be.visible') 
+    })
+
+    it('Teste numero 30 - Preenche campo usando invoke.', function(){
+        const texto = "Augusto"
+        cy.get('#firstName').invoke('val',texto).should('have.value',"Augusto")
+    })
+
+    it('Teste numero 31 - Preenche campo usando invoke e o repear.', function(){
+        const texto_rep = Cypress._.repeat('8',8)
+        cy.get('#firstName').invoke('val',texto_rep).should('have.value',"88888888")
+
+        //Podemos usar a variavel para validar o que foi digitado.
+        //cy.get('#firstName').invoke('val',texto).should('have.value',texto_rep)
+    })
+
+    it('Teste numero 32 - Fazer uma requisição com request.', function(){
+        cy.request('https://cac-tat.s3.eu-central-1.amazonaws.com/index.html')  //request feita com sucesso
+        .should(function(response){
+            const {status, statusText, body} = response
+            expect(status).to.equal(200)   //pegou o status com o response e comparou com 200
+            expect(statusText).to.equal("OK")   //pegou o statusText com o response e comparou com OK
+            expect(body).to.include("CAC TAT") //pegou o body com o response e comparou com CAC TAT
+        })
+    })
+
+    it.only('Teste numero 32 - Encontre o gato.', function(){
+        cy.get("#cat").invoke('show').should('be.visible')
+    })
 
 })
 

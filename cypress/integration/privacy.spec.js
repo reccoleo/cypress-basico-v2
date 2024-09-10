@@ -4,6 +4,5 @@ Cypress._.times(5, function(){  //Primeiro colocamos o número de repetições e
         cy.visit('./src/privacy.html')
         cy.contains('Talking About Testing').should('be.visible')
     })
-     
 })
 
