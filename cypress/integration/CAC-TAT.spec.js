@@ -145,9 +145,25 @@ describe('CEntral de atendimento CAC-TAT', function(){
     })
     it('Teste numero 25 - Simular resolução mobile.', function(){
         cy.preenchaCamposObrigatorios()
-        cy.get(".button").click() 
-               
+        cy.get(".button").click()          
     })
+    it('Teste numero 26 - Usar a função cy.clock() para esperar um tempo ao mostrar feedback.', function(){
+        cy.preenchaCamposObrigatorios()
+        cy.get(".button").click() 
+        cy.get('.success').should('be.visible')
+        cy.clock(3000)
+        cy.get('.success').should('not.be.visible')
+    })
+
+    it.only('Teste numero 27 - Usar a função cy.tick() para avançar no tempo ao mostrar feedback.', function(){
+        cy.preenchaCamposObrigatorios()
+        cy.get(".button").click() 
+        cy.clock()
+        cy.get('.success').should('be.visible')
+        cy.tick(3000)
+        cy.get('.success').should('not.be.visible')
+    })
+    
 
 })
 
